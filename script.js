@@ -19,6 +19,9 @@ let curIndex = 0;
 let qtySide = 5;
 
 const slider = document.querySelector(".slider");
+const btnRight = document.querySelector(".slider__icon--right");
+const btnLeft = document.querySelector(".slider__icon--left");
+const backToStartBtn = document.querySelector(".reload");
 
 const generateSlider = function () {
   slider.innerHTML = `
@@ -45,66 +48,109 @@ const generateSlider = function () {
 };
 generateSlider();
 
-const nextPhotosMove = function () {
-  if (curIndex < photos.length - 1) {
-    let photoNext = document.getElementById(curIndex + 1);
-    photoNext.classList.remove("photo-next");
-    photoNext.classList.remove("photo-next-1");
-    photoNext.classList.add("photo-curent");
-  }
-  //outher next
-  if (curIndex + qtySide < photos.length - 1) {
-    for (let i = 2; i <= qtySide + 1; i++) {
-      let photoRight = document.getElementById(curIndex + i); //+2 +3 +4 +5 +6
-      photoRight.classList.remove(`photo-next-${i}`);
-      photoRight.classList.add(`photo-next-${i - 1}`);
+const nextPhotosMove = function (comand) {
+  if (comand == "R") {
+    if (curIndex < photos.length - 1) {
+      for (let i = 1; i <= qtySide + 1 && i < photos.length - curIndex; i++) {
+        let photoNext = document.getElementById(curIndex + i);
+        if (i == 1) {
+          photoNext.classList.remove("photo-next");
+          photoNext.classList.remove("photo-next-1");
+          photoNext.classList.add("photo-curent");
+        } else {
+          photoNext.classList.remove(`photo-next-${i}`);
+          photoNext.classList.add(`photo-next-${i - 1}`);
+        }
+      }
     }
-  } else if (curIndex < photos.length - 2) {
-    for (let i = 2; i < photos.length - curIndex; i++) {
-      let photoRight = document.getElementById(curIndex + i); //+2 +3 +4 +5 +6
-      photoRight.classList.remove(`photo-next-${i}`);
-      photoRight.classList.add(`photo-next-${i - 1}`);
+  }
+  if (comand == "L") {
+    if (curIndex < photos.length - 1) {
+      for (let i = 1; i <= qtySide && i < photos.length - curIndex; i++) {
+        let photoNext = document.getElementById(curIndex + i);
+        photoNext.classList.remove(`photo-next-${i}`);
+        photoNext.classList.add(`photo-next-${i + 1}`);
+      }
     }
   }
 };
-const curPhotoMove = function () {
-  if (curIndex < photos.length) {
-    let photoCurent = document.getElementById(curIndex);
+const curPhotoMove = function (comand) {
+  let photoCurent = document.getElementById(curIndex);
+
+  if (comand == "R" && curIndex < photos.length) {
     photoCurent.classList.remove("photo-curent");
     photoCurent.classList.add("photo-prev");
     photoCurent.classList.add("photo-prev-1");
   }
+  if (comand == "L" && curIndex > 0 && curIndex != photos.length) {
+    photoCurent.classList.remove("photo-curent");
+    photoCurent.classList.add("photo-next");
+    photoCurent.classList.add("photo-next-1");
+  }
 };
-const prevPhotosMove = function () {
-  if (curIndex > 0) {
-    if (curIndex <= qtySide) {
-      for (let i = 1; i <= curIndex; i++) {
-        let photoLeft = document.getElementById(curIndex - i);
-        photoLeft.classList.remove(`photo-prev-${i}`);
-        photoLeft.classList.add(`photo-prev-${i + 1}`);
-      }
-    } else {
-      for (let i = 1; i <= qtySide; i++) {
+const prevPhotosMove = function (comand) {
+  if (comand == "R") {
+    if (curIndex > 0) {
+      for (let i = 1; i <= curIndex && i <= qtySide; i++) {
         let photoLeft = document.getElementById(curIndex - i);
         photoLeft.classList.remove(`photo-prev-${i}`);
         photoLeft.classList.add(`photo-prev-${i + 1}`);
       }
     }
   }
+  if (comand == "L") {
+    if (curIndex > 0) {
+      for (let i = 1; i <= curIndex && i <= qtySide + 1; i++) {
+        let photoLeft = document.getElementById(curIndex - i);
+        if (i == 1) {
+          photoLeft.classList.remove(`photo-prev-${i}`);
+          photoLeft.classList.remove(`photo-prev`);
+          photoLeft.classList.add("photo-curent");
+        } else {
+          photoLeft.classList.remove(`photo-prev-${i}`);
+          photoLeft.classList.add(`photo-prev-${i - 1}`);
+        }
+      }
+    }
+  }
 };
 
-document.querySelector(".slider").addEventListener("click", function (e) {
-  if (curIndex == photos.length) {
-    curIndex = 0;
-    generateSlider();
-    return;
-  }
-  curPhotoMove();
-  nextPhotosMove();
-  prevPhotosMove();
+const moveRight = function () {
+  prevPhotosMove("R");
+  curPhotoMove("R");
+  nextPhotosMove("R");
 
   if (curIndex < photos.length) curIndex += 1;
+
   if (curIndex == photos.length) {
-    slider.insertAdjacentHTML("beforeend", `<div class="reload">RELOAD</div>`);
+    backToStartBtn.style.visibility = "visible";
+    btnRight.classList.add("slider__icon-inactive");
+  }
+  if (curIndex == 1) btnLeft.classList.remove("slider__icon-inactive");
+};
+const moveLeft = function () {
+  if (curIndex == photos.length) backToStartBtn.style.visibility = "hidden";
+  prevPhotosMove("L");
+  curPhotoMove("L");
+  nextPhotosMove("L");
+
+  if (curIndex > 0) curIndex -= 1;
+
+  if (curIndex == 0) {
+    btnLeft.classList.add("slider__icon-inactive");
+  }
+  if (curIndex == photos.length - 1) {
+    btnRight.classList.remove("slider__icon-inactive");
+  }
+};
+btnLeft.addEventListener("click", function () {
+  if (curIndex != 0) moveLeft();
+});
+btnRight.addEventListener("click", function () {
+  if (curIndex != photos.length) moveRight();
+});
+backToStartBtn.addEventListener("click", function () {
+  while (curIndex != 0) {
+    moveLeft();
   }
 });

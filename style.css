@@ -19,6 +19,10 @@ body {
     position: absolute;
     z-index: 10;
     fill: white; }
+    .slider__icon-inactive {
+      fill: gray; }
+    .slider__icon:active {
+      transform: scale(0.8); }
     .slider__icon--right {
       top: 10rem;
       right: 25%; }
@@ -32,7 +36,9 @@ body {
   transform: translate(-50%, -50%);
   top: 10rem;
   color: gray;
-  font-size: 2.5rem; }
+  font-size: 2.5rem;
+  z-index: 2;
+  visibility: hidden; }
 
 .photo {
   width: 30%;

@@ -5,6 +5,7 @@ body {
   margin: 0;
   background-color: rgb(46, 46, 46);
 }
+
 .slider {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("../img/background-slider.jpg");
@@ -20,6 +21,12 @@ body {
     position: absolute;
     z-index: 10;
     fill: white;
+    &-inactive {
+      fill: gray;
+    }
+    &:active {
+      transform: scale(0.8);
+    }
     &--right {
       top: 10rem;
       right: 25%;
@@ -37,6 +44,8 @@ body {
   top: 10rem;
   color: gray;
   font-size: 2.5rem;
+  z-index: 2;
+  visibility: hidden;
 }
 .photo {
   width: 30%;
