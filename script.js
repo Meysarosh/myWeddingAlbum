@@ -23,6 +23,24 @@ const btnRight = document.querySelector(".slider__icon--right");
 const btnLeft = document.querySelector(".slider__icon--left");
 const backToStartBtn = document.querySelector(".reload");
 
+const sliderBottomActive = function () {
+  const slides = document.querySelectorAll(".slider__bottom__img");
+  slides.forEach(function (slide, i) {
+    slide.style.transform = `translateX(${(i - curIndex) * 100}%)`;
+    if (i - curIndex == 0) {
+      slide.style.opacity = "1";
+    } else if (Math.abs(i - curIndex) == 1) {
+      slide.style.opacity = "0.5";
+    } else if (Math.abs(i - curIndex) == 2) {
+      slide.style.opacity = "0.35";
+    } else if (Math.abs(i - curIndex) == 3) {
+      slide.style.opacity = "0.2";
+    } else {
+      slide.style.opacity = "0.1";
+    }
+  });
+};
+
 const generateSlider = function () {
   slider.innerHTML = `
   `;
@@ -45,8 +63,16 @@ const generateSlider = function () {
       })
       .join("")}`
   );
+  slider.insertAdjacentHTML(
+    "beforeend",
+    `<div class="slider__bottom">${photos
+      .map((el, i) => {
+        return `<img src="${el}" alt="photo" data-id="${i}" class="slider__bottom__img" />`;
+      })
+      .join("")}</div>`
+  );
+  sliderBottomActive();
 };
-generateSlider();
 
 const nextPhotosMove = function (comand) {
   if (comand == "R") {
@@ -116,41 +142,66 @@ const prevPhotosMove = function (comand) {
 };
 
 const moveRight = function () {
-  prevPhotosMove("R");
-  curPhotoMove("R");
-  nextPhotosMove("R");
+  if (curIndex != photos.length) {
+    prevPhotosMove("R");
+    curPhotoMove("R");
+    nextPhotosMove("R");
 
-  if (curIndex < photos.length) curIndex += 1;
-
-  if (curIndex == photos.length) {
-    backToStartBtn.style.visibility = "visible";
-    btnRight.classList.add("slider__icon-inactive");
+    if (curIndex < photos.length) curIndex += 1;
+    sliderBottomActive();
+    if (curIndex == photos.length) {
+      backToStartBtn.style.visibility = "visible";
+      btnRight.classList.add("slider__icon-inactive");
+    }
+    if (curIndex == 1) btnLeft.classList.remove("slider__icon-inactive");
   }
-  if (curIndex == 1) btnLeft.classList.remove("slider__icon-inactive");
 };
 const moveLeft = function () {
-  if (curIndex == photos.length) backToStartBtn.style.visibility = "hidden";
-  prevPhotosMove("L");
-  curPhotoMove("L");
-  nextPhotosMove("L");
+  if (curIndex != 0) {
+    if (curIndex == photos.length) backToStartBtn.style.visibility = "hidden";
+    prevPhotosMove("L");
+    curPhotoMove("L");
+    nextPhotosMove("L");
 
-  if (curIndex > 0) curIndex -= 1;
-
-  if (curIndex == 0) {
-    btnLeft.classList.add("slider__icon-inactive");
-  }
-  if (curIndex == photos.length - 1) {
-    btnRight.classList.remove("slider__icon-inactive");
+    if (curIndex > 0) curIndex -= 1;
+    sliderBottomActive();
+    if (curIndex == 0) {
+      btnLeft.classList.add("slider__icon-inactive");
+    }
+    if (curIndex == photos.length - 1) {
+      btnRight.classList.remove("slider__icon-inactive");
+    }
   }
 };
+
+generateSlider();
 btnLeft.addEventListener("click", function () {
-  if (curIndex != 0) moveLeft();
+  moveLeft();
 });
 btnRight.addEventListener("click", function () {
-  if (curIndex != photos.length) moveRight();
+  moveRight();
 });
 backToStartBtn.addEventListener("click", function () {
   while (curIndex != 0) {
     moveLeft();
   }
+});
+document
+  .querySelector(".slider__bottom")
+  .addEventListener("click", function (e) {
+    let id = e.target.dataset.id;
+    if (curIndex < id) {
+      while (curIndex != id) {
+        moveRight();
+      }
+    } else if (curIndex > id) {
+      while (curIndex != id) {
+        moveLeft();
+      }
+    }
+    sliderBottomActive();
+  });
+document.addEventListener("keydown", function (e) {
+  e.key == "ArrowRight" && moveRight();
+  e.key == "ArrowLeft" && moveLeft();
 });
