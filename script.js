@@ -116,13 +116,9 @@ const sliderBottomActive = function () {
     if (i - curIndex == 0) {
       slide.style.opacity = "1";
     } else if (Math.abs(i - curIndex) == 1) {
-      slide.style.opacity = "0.5";
-    } else if (Math.abs(i - curIndex) == 2) {
-      slide.style.opacity = "0.35";
-    } else if (Math.abs(i - curIndex) == 3) {
-      slide.style.opacity = "0.2";
+      slide.style.opacity = "0.65";
     } else {
-      slide.style.opacity = "0.1";
+      slide.style.opacity = "0.35";
     }
   });
 };
