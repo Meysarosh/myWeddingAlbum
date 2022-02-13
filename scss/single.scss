@@ -42,7 +42,9 @@ body {
     grid-column: 1/-1;
     font-weight: 400;
     font-size: 5rem;
+    padding: 2rem;
     color: $light;
+
     //   color: rgb(135, 100, 69);
   }
   &__box {
@@ -50,6 +52,7 @@ body {
       width: 100%;
       filter: blur(1px) brightness(1.2);
       border-radius: 1rem;
+      box-shadow: 0 1rem 2rem $brown;
     }
     &-btn {
       width: 100%;
@@ -208,6 +211,9 @@ body {
     left: 50%;
     transform: rotate3d(0, 1, 0, 0) translate(-50%, 2.4rem) scale(1.2);
     box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.542);
+    &-large {
+      transform: rotate3d(0, 1, 0, 0) translate(-50%, 2.4rem) scale(2);
+    }
   }
   &-next {
     left: 65%;

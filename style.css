@@ -28,11 +28,13 @@ body {
     grid-column: 1/-1;
     font-weight: 400;
     font-size: 5rem;
+    padding: 2rem;
     color: #faf3e0; }
   .nav__box-img {
     width: 100%;
     filter: blur(1px) brightness(1.2);
-    border-radius: 1rem; }
+    border-radius: 1rem;
+    box-shadow: 0 1rem 2rem #b68973; }
   .nav__box-btn {
     width: 100%;
     background-color: #faf3e0;
@@ -152,6 +154,8 @@ body {
     left: 50%;
     transform: rotate3d(0, 1, 0, 0) translate(-50%, 2.4rem) scale(1.2);
     box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.542); }
+    .photo-curent-large {
+      transform: rotate3d(0, 1, 0, 0) translate(-50%, 2.4rem) scale(2); }
   .photo-next {
     left: 65%;
     filter: brightness(0.5); }
