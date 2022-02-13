@@ -1,18 +1,87 @@
+$slider-background: rgb(30, 33, 45);
+$brown: rgb(182, 137, 115);
+$brownl: rgb(234, 191, 159);
+$light: rgb(250, 243, 224);
+
 body {
   box-sizing: border-box;
   font-size: 62.5%;
   padding: 0;
   margin: 0;
-  background-color: rgb(46, 46, 46);
+  font-family: "Cookie", cursive;
+}
+.header {
+  width: 100%;
+  height: 100vh;
+  //   background-blend-mode: screen;
+  background-image: linear-gradient(
+      to bottom,
+      rgba($brown, 0.8) 0%,
+      rgba($brown, 0.8) 75%,
+      rgba($slider-background, 0.8) 90%,
+      rgba($slider-background, 1) 100%
+    ),
+    url("../img/background-slider.jpg");
+  background-size: cover;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.nav {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: min-content 10rem min-content;
+  justify-items: center;
+  align-items: center;
+  column-gap: 2rem;
+  object-fit: cover;
+
+  &__title {
+    grid-row: 1/2;
+    grid-column: 1/-1;
+    font-weight: 400;
+    font-size: 5rem;
+    color: $light;
+    //   color: rgb(135, 100, 69);
+  }
+  &__box {
+    &-img {
+      width: 100%;
+      filter: blur(1px) brightness(1.2);
+      border-radius: 1rem;
+    }
+    &-btn {
+      width: 100%;
+      background-color: $light;
+      font-family: inherit;
+      font-size: 2rem;
+      color: $slider-background;
+      padding: 0.5rem;
+      transform: translateY(-6rem) scale(1.05);
+      transition: all 0.2s;
+      border: 2px solid $slider-background;
+
+      &:hover {
+        transform: translateY(-6rem) scale(1.15);
+        background-color: $brownl;
+      }
+    }
+  }
 }
 
 .slider {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background-image: linear-gradient(
+      to bottom,
+      rgba($slider-background, 1) 0%,
+      rgba($slider-background, 0.8) 10%,
+      rgba($slider-background, 0.7) 25%
+    ),
     url("../img/background-slider.jpg");
   background-size: cover;
   backdrop-filter: blur(4px);
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   perspective: 70rem;
   &__icon {
@@ -40,11 +109,11 @@ body {
     height: 6.5rem;
     position: absolute;
     bottom: 0;
-    background-color: black;
+    background-color: $slider-background;
     overflow-x: scroll;
     &__img {
       height: 5.5rem;
-      border: 0.125rem solid black;
+      border: 0.125rem solid $slider-background;
       position: absolute;
       left: 43%;
       top: 0.125rem;
@@ -59,7 +128,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: black;
+  background: $slider-background;
 }
 
 /* Handle */
@@ -72,7 +141,7 @@ body {
   background: #555;
 }
 ::-webkit-scrollbar-corner {
-  background-color: black;
+  background-color: $slider-background;
 }
 // ::-webkit-scrollbar-button {
 

@@ -17,11 +17,7 @@ const photos = [
 ];
 let curIndex = 0;
 let qtySide = 5;
-
 const slider = document.querySelector(".slider");
-const btnRight = document.querySelector(".slider__icon--right");
-const btnLeft = document.querySelector(".slider__icon--left");
-const backToStartBtn = document.querySelector(".reload");
 
 const sliderBottomActive = function () {
   const slides = document.querySelectorAll(".slider__bottom__img");
@@ -46,7 +42,14 @@ const generateSlider = function () {
   `;
   slider.insertAdjacentHTML(
     "afterbegin",
-    `<img src="${photos[curIndex]}" alt="photo" class="photo photo-curent" id="0"/>`
+    `<svg class="slider__icon slider__icon--left slider__icon-inactive">
+    <use xlink:href="img/symbol.svg#icon-chevron-left"></use>
+  </svg>
+  <svg class="slider__icon slider__icon--right">
+    <use xlink:href="img/symbol.svg#icon-chevron-right"></use>
+  </svg>
+  <button class="reload">Back to start</button>
+  <img src="${photos[curIndex]}" alt="photo" class="photo photo-curent" id="0"/>`
   );
   slider.insertAdjacentHTML(
     "afterbegin",
@@ -73,6 +76,11 @@ const generateSlider = function () {
   );
   sliderBottomActive();
 };
+generateSlider();
+
+const btnRight = document.querySelector(".slider__icon--right");
+const btnLeft = document.querySelector(".slider__icon--left");
+const backToStartBtn = document.querySelector(".reload");
 
 const nextPhotosMove = function (comand) {
   if (comand == "R") {
@@ -174,7 +182,6 @@ const moveLeft = function () {
   }
 };
 
-generateSlider();
 btnLeft.addEventListener("click", function () {
   moveLeft();
 });
