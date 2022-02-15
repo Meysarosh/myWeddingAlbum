@@ -1,13 +1,13 @@
-const photos = [
-  "img/01.jpg",
-  "img/02.jpg",
-  "img/03.jpg",
-  "img/04.jpg",
-  "img/05.jpg",
-  "img/06.jpg",
-  "img/07.jpg",
-  "img/08.jpg",
-  "img/09.jpg",
+const photosLand = [
+  "img/1.jpg",
+  "img/2.jpg",
+  "img/3.jpg",
+  "img/4.jpg",
+  "img/5.jpg",
+  "img/6.jpg",
+  "img/7.jpg",
+  "img/8.jpg",
+  "img/9.jpg",
   "img/10.jpg",
   "img/11.jpg",
   "img/12.jpg",
@@ -99,11 +99,51 @@ const photos = [
   "img/98.jpg",
   "img/99.jpg",
 ];
-const photosPort = ["img/100.jpg"];
+const photosPort = [
+  "img/100.jpg",
+  "img/101.jpg",
+  "img/102.jpg",
+  "img/103.jpg",
+  "img/104.jpg",
+  "img/105.jpg",
+  "img/106.jpg",
+  "img/107.jpg",
+  "img/108.jpg",
+  "img/109.jpg",
+  "img/110.jpg",
+  "img/111.jpg",
+  "img/112.jpg",
+  "img/113.jpg",
+  "img/114.jpg",
+  "img/115.jpg",
+  "img/116.jpg",
+  "img/117.jpg",
+  "img/118.jpg",
+  "img/119.jpg",
+  "img/120.jpg",
+  "img/121.jpg",
+  "img/122.jpg",
+  "img/123.jpg",
+  "img/124.jpg",
+  "img/125.jpg",
+  "img/126.jpg",
+  "img/127.jpg",
+  "img/128.jpg",
+  "img/129.jpg",
+  "img/130.jpg",
+  "img/131.jpg",
+  "img/132.jpg",
+  "img/133.jpg",
+];
 
 let curIndex = 0;
-let qtySide = 5;
+const qtySide = 5;
 const slider = document.querySelector(".slider");
+let photos = photosLand;
+let btnRight;
+let btnLeft;
+let backToStartBtn;
+let switchBtn;
 
 document.querySelector(".toslide").addEventListener("click", function () {
   slider.scrollIntoView({ behavior: "smooth" });
@@ -124,19 +164,7 @@ const sliderBottomActive = function () {
 };
 
 const generateSlider = function () {
-  slider.innerHTML = `
-  `;
-  slider.insertAdjacentHTML(
-    "afterbegin",
-    `<svg class="slider__icon slider__icon--left slider__icon-inactive">
-    <use xlink:href="img/symbol.svg#icon-chevron-left"></use>
-  </svg>
-  <svg class="slider__icon slider__icon--right">
-    <use xlink:href="img/symbol.svg#icon-chevron-right"></use>
-  </svg>
-  <button class="reload">Back to start</button>
-  <img src="${photos[curIndex]}" alt="photo" class="photo photo-curent" id="0"/>`
-  );
+  slider.innerHTML = ``;
   slider.insertAdjacentHTML(
     "afterbegin",
     `${photos
@@ -150,23 +178,34 @@ const generateSlider = function () {
           }" />`;
         }
       })
-      .join("")}`
-  );
-  slider.insertAdjacentHTML(
-    "beforeend",
-    `<div class="slider__bottom">${photos
-      .map((el, i) => {
-        return `<img src="${el}" alt="photo" data-id="${i}" class="slider__bottom__img" />`;
-      })
-      .join("")}</div>`
+      .join("")}
+    <svg class="slider__icon slider__icon--left slider__icon-inactive">
+    <use xlink:href="img/symbol.svg#icon-chevron-left"></use>
+  </svg>
+  <svg class="slider__icon slider__icon--right">
+    <use xlink:href="img/symbol.svg#icon-chevron-right"></use>
+  </svg>
+  <button class="slider__btn slider__btn--reload">Back to start</button>
+  <button class="slider__btn slider__btn--switch">Switch to portret photos</button>
+  <img src="${photos[curIndex]}" alt="photo" class="photo photo-curent" id="0"/>
+  <div class="slider__bottom">${photos
+    .map((el, i) => {
+      return `<img src="${el}" alt="photo" data-id="${i}" class="slider__bottom__img" />`;
+    })
+    .join("")}</div>`
   );
   sliderBottomActive();
+  btnRight = document.querySelector(".slider__icon--right");
+  btnLeft = document.querySelector(".slider__icon--left");
+  backToStartBtn = document.querySelector(".slider__btn--reload");
+  switchBtn = document.querySelector(".slider__btn--switch");
 };
 generateSlider();
 
-const btnRight = document.querySelector(".slider__icon--right");
-const btnLeft = document.querySelector(".slider__icon--left");
-const backToStartBtn = document.querySelector(".reload");
+// const btnRight = document.querySelector(".slider__icon--right");
+// const btnLeft = document.querySelector(".slider__icon--left");
+// const backToStartBtn = document.querySelector(".slider__btn--reload");
+// const switchBtn = document.querySelector(".slider__btn--switch");
 
 const nextPhotosMove = function (comand) {
   if (comand == "R") {
@@ -247,6 +286,7 @@ const moveRight = function () {
     sliderBottomActive();
     if (curIndex == photos.length) {
       backToStartBtn.style.visibility = "visible";
+      switchBtn.style.visibility = "visible";
       btnRight.classList.add("slider__icon-inactive");
     }
     if (curIndex == 1) btnLeft.classList.remove("slider__icon-inactive");
@@ -254,7 +294,10 @@ const moveRight = function () {
 };
 const moveLeft = function () {
   if (curIndex != 0) {
-    if (curIndex == photos.length) backToStartBtn.style.visibility = "hidden";
+    if (curIndex == photos.length) {
+      backToStartBtn.style.visibility = "hidden";
+      switchBtn.style.visibility = "hidden";
+    }
     prevPhotosMove("L");
     curPhotoMove("L");
     nextPhotosMove("L");
@@ -270,37 +313,65 @@ const moveLeft = function () {
   }
 };
 
-btnLeft.addEventListener("click", function () {
-  moveLeft();
+//slider arrow icons click
+document.querySelector(".slider").addEventListener("click", function (e) {
+  if (!e.target.closest(".slider__icon")) return;
+  if (e.target.classList.contains("slider__icon--left")) moveLeft();
+  if (e.target.classList.contains("slider__icon--right")) moveRight();
 });
-btnRight.addEventListener("click", function () {
-  moveRight();
-});
-backToStartBtn.addEventListener("click", function () {
-  while (curIndex != 0) {
-    moveLeft();
+
+//end of slider buttons
+document.querySelector(".slider").addEventListener("click", function (e) {
+  if (!e.target.classList.contains("slider__btn")) return;
+  if (e.target.classList.contains("slider__btn--reload")) {
+    while (curIndex != 0) {
+      moveLeft();
+    }
+  }
+  if (e.target.classList.contains("slider__btn--switch")) {
+    curIndex = 0;
+    if (photos.length == photosLand.length) {
+      photos = photosPort;
+      switchBtn.innerText = `Switch to landscape photos`;
+    } else {
+      photos = photosLand;
+      switchBtn.innerText = `Switch to portret photos`;
+    }
+
+    generateSlider();
   }
 });
-document
-  .querySelector(".slider__bottom")
-  .addEventListener("click", function (e) {
-    let id = e.target.dataset.id;
-    if (curIndex < id) {
-      while (curIndex != id) {
-        moveRight();
-      }
-    } else if (curIndex > id) {
-      while (curIndex != id) {
-        moveLeft();
-      }
+
+//Slider bottom img click
+document.querySelector(".slider").addEventListener("click", function (e) {
+  if (!e.target.classList.contains("slider__bottom__img")) return;
+  let id = e.target.dataset.id;
+  if (curIndex < id) {
+    while (curIndex != id) {
+      moveRight();
     }
-    sliderBottomActive();
-  });
+  } else if (curIndex > id) {
+    while (curIndex != id) {
+      moveLeft();
+    }
+  }
+  sliderBottomActive();
+});
+
+//keyboard arrows
 document.addEventListener("keydown", function (e) {
   e.key == "ArrowRight" && moveRight();
   e.key == "ArrowLeft" && moveLeft();
 });
+
+//slider img enlargement
 document.querySelector(".slider").addEventListener("click", function (e) {
   if (!e.target.classList.contains("photo-curent")) return;
-  document.querySelector(".photo-curent").classList.add("photo-curent-large");
+  if (e.target.classList.contains("photo-curent-large")) {
+    document
+      .querySelector(".photo-curent")
+      .classList.remove("photo-curent-large");
+  } else {
+    document.querySelector(".photo-curent").classList.add("photo-curent-large");
+  }
 });
