@@ -212,12 +212,17 @@ const generateSlider = function () {
     .join("")}</div>`
   );
   sliderBottomActive();
+
   btnRight = document.querySelector(".slider__icon--right");
   btnLeft = document.querySelector(".slider__icon--left");
   btnClose = document.querySelector(".slider__icon--close");
   backToStartBtn = document.querySelector(".slider__btn--reload");
   switchBtn = document.querySelector(".slider__btn--switch");
   autoSlide = document.querySelector(".autoslide__btn");
+
+  if (photos.length == photosPort.length) {
+    switchBtn.innerText = `Switch to landscape photos`;
+  }
 };
 generateSlider();
 
@@ -403,10 +408,8 @@ document.querySelector(".slider").addEventListener("click", function (e) {
     curIndex = 0;
     if (photos.length == photosLand.length) {
       photos = photosPort;
-      switchBtn.innerText = `Switch to landscape photos`;
     } else {
       photos = photosLand;
-      switchBtn.innerText = `Switch to portret photos`;
     }
 
     generateSlider();
