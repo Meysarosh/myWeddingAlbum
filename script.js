@@ -202,8 +202,8 @@ const generateSlider = function () {
   <svg class="slider__icon slider__icon--right">
     <use xlink:href="img/symbol.svg#icon-chevron-right"></use>
   </svg>
-  <button class="slider__btn slider__btn--reload">Back to start</button>
-  <button class="slider__btn slider__btn--switch">Switch to portret photos</button>
+  <button class="slider__btn slider__btn--reload nav__btns">Back to start</button>
+  <button class="slider__btn slider__btn--switch nav__btns">Switch to portret photos</button>
   <img src="${photos[curIndex]}" alt="photo" class="photo photo-curent" id="0"/>
   <div class="slider__bottom">${photos
     .map((el, i) => {
