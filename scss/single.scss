@@ -57,6 +57,37 @@ body {
     background-color: $slider-background;
     padding: 1rem;
     border-radius: 1rem;
+
+    display: inline-block;
+    transition: all 0.2s;
+    position: relative;
+    animation: moveInBottom 1s ease-out 0.75s;
+    animation-fill-mode: forwards;
+
+    &:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 1rem 2rem rgba($slider-background, 0.2);
+
+      &::after {
+        transform: scaleX(1.4) scaleY(1.8);
+        opacity: 0;
+      }
+    }
+
+    &::after {
+      background-color: $slider-background;
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 1rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s;
+    }
+
     &--slide {
       grid-column: 2/3;
       grid-row: 3/4;

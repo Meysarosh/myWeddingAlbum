@@ -38,7 +38,30 @@ body {
     color: #faf3e0;
     background-color: #1e212d;
     padding: 1rem;
-    border-radius: 1rem; }
+    border-radius: 1rem;
+    display: inline-block;
+    transition: all 0.2s;
+    position: relative;
+    animation: moveInBottom 1s ease-out 0.75s;
+    animation-fill-mode: forwards; }
+    .nav__btns:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 1rem 2rem rgba(30, 33, 45, 0.2); }
+      .nav__btns:hover::after {
+        transform: scaleX(1.4) scaleY(1.8);
+        opacity: 0; }
+    .nav__btns::after {
+      background-color: #1e212d;
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 1rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s; }
     .nav__btns--slide {
       grid-column: 2/3;
       grid-row: 3/4; }
