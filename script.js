@@ -142,12 +142,16 @@ const slider = document.querySelector(".slider");
 let photos = photosLand;
 let btnRight;
 let btnLeft;
+let btnClose;
 let backToStartBtn;
 let switchBtn;
 
-document.querySelector(".toslide").addEventListener("click", function () {
-  slider.scrollIntoView({ behavior: "smooth" });
-});
+document
+  .querySelector(".nav__btns--slide")
+  .addEventListener("click", function () {
+    slider.style.visibility = "visible";
+    slider.style.transform = "scale(1)";
+  });
 
 const sliderBottomActive = function () {
   const slides = document.querySelectorAll(".slider__bottom__img");
@@ -179,6 +183,9 @@ const generateSlider = function () {
         }
       })
       .join("")}
+      <svg class="slider__icon slider__icon--close">
+    <use xlink:href="img/symbol.svg#icon-cross"></use>
+  </svg>
     <svg class="slider__icon slider__icon--left slider__icon-inactive">
     <use xlink:href="img/symbol.svg#icon-chevron-left"></use>
   </svg>
@@ -197,6 +204,7 @@ const generateSlider = function () {
   sliderBottomActive();
   btnRight = document.querySelector(".slider__icon--right");
   btnLeft = document.querySelector(".slider__icon--left");
+  btnClose = document.querySelector(".slider__icon--close");
   backToStartBtn = document.querySelector(".slider__btn--reload");
   switchBtn = document.querySelector(".slider__btn--switch");
 };
@@ -312,14 +320,45 @@ const moveLeft = function () {
     }
   }
 };
-
+const hideSlider = function () {
+  slider.style.visibility = "hidden";
+  slider.style.transform = "scale(0.0)";
+};
 //slider arrow icons click
 document.querySelector(".slider").addEventListener("click", function (e) {
   if (!e.target.closest(".slider__icon")) return;
-  if (e.target.classList.contains("slider__icon--left")) moveLeft();
-  if (e.target.classList.contains("slider__icon--right")) moveRight();
+  if (
+    e.target.closest(".slider__icon--left") ||
+    e.target.classList.contains("slider__icon--left")
+  )
+    moveLeft();
+  if (
+    e.target.closest(".slider__icon--right") ||
+    e.target.classList.contains("slider__icon--right")
+  )
+    moveRight();
+  if (
+    e.target.closest(".slider__icon--close") ||
+    e.target.classList.contains("slider__icon--close")
+  )
+    hideSlider();
 });
-
+//keyboard arrows
+document.addEventListener("keydown", function (e) {
+  e.key == "ArrowRight" && moveRight();
+  e.key == "ArrowLeft" && moveLeft();
+  e.key == "Escape" && hideSlider();
+});
+//slider side-img's click
+document.querySelector(".slider").addEventListener("click", function (e) {
+  if (
+    !e.target.classList.contains("photo-next-1") &&
+    !e.target.classList.contains("photo-prev-1")
+  )
+    return;
+  if (e.target.classList.contains("photo-next-1")) moveRight();
+  if (e.target.classList.contains("photo-prev-1")) moveLeft();
+});
 //end of slider buttons
 document.querySelector(".slider").addEventListener("click", function (e) {
   if (!e.target.classList.contains("slider__btn")) return;
@@ -356,12 +395,6 @@ document.querySelector(".slider").addEventListener("click", function (e) {
     }
   }
   sliderBottomActive();
-});
-
-//keyboard arrows
-document.addEventListener("keydown", function (e) {
-  e.key == "ArrowRight" && moveRight();
-  e.key == "ArrowLeft" && moveLeft();
 });
 
 //slider img enlargement
