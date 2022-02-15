@@ -124,7 +124,7 @@ body {
     width: 3rem;
     height: 3rem;
     position: absolute;
-    top: 12rem;
+    top: calc(50% - 5.5rem);
     z-index: 10;
     fill: #faf3e0;
     cursor: pointer; }
@@ -197,7 +197,7 @@ body {
 .photo {
   max-width: 30%;
   max-height: 50%;
-  top: 25%;
+  top: calc(50% - 5.5rem);
   position: absolute;
   transition: all 1s; }
   .photo-prev {
@@ -206,65 +206,65 @@ body {
     .photo-prev-1 {
       cursor: pointer;
       z-index: 0;
-      transform: rotate3d(0, 1, 0, 45deg) translate(0, 2rem) scale(0.8, 1.1);
+      transform: rotate3d(0, 1, 0, 45deg) translate(0, calc(-50% + 2rem)) scale(0.8, 1.1);
       opacity: 0.9; }
     .photo-prev-2 {
       z-index: -1;
-      transform: rotate3d(0, 1, 0, 45deg) translate(-1rem, 1rem) scale(0.8, 1);
+      transform: rotate3d(0, 1, 0, 45deg) translate(-1rem, calc(-50% + 1rem)) scale(0.8, 1);
       opacity: 0.75; }
     .photo-prev-3 {
       z-index: -2;
-      transform: rotate3d(0, 1, 0, 45deg) translate(-2rem, 0rem) scale(0.8, 0.95);
+      transform: rotate3d(0, 1, 0, 45deg) translate(-2rem, calc(-50% + 0rem)) scale(0.8, 0.95);
       opacity: 0.5; }
     .photo-prev-4 {
       z-index: -3;
-      transform: rotate3d(0, 1, 0, 45deg) translate(-3rem, -1rem) scale(0.8, 0.9);
+      transform: rotate3d(0, 1, 0, 45deg) translate(-3rem, calc(-50% - 1rem)) scale(0.8, 0.9);
       opacity: 0.35; }
     .photo-prev-5 {
       z-index: -4;
-      transform: rotate3d(0, 1, 0, 45deg) translate(-4rem, -2rem) scale(0.8, 0.85);
+      transform: rotate3d(0, 1, 0, 45deg) translate(-4rem, calc(-50% - 2rem)) scale(0.8, 0.85);
       opacity: 0.2; }
     .photo-prev-6 {
       opacity: 0;
       visibility: hidden;
       z-index: -4;
-      transform: rotate3d(0, 1, 0, 45deg) translate(-4rem, -2rem) scale(0.8, 0.85); }
+      transform: rotate3d(0, 1, 0, 45deg) translate(-4rem, calc(-50% - 2rem)) scale(0.8, 0.85); }
   .photo-curent {
     z-index: 1;
     left: 50%;
-    transform: rotate3d(0, 1, 0, 0) translate(-50%, 2.4rem) scale(1.2);
+    transform: rotate3d(0, 1, 0, 0) translate(-50%, calc(-50% + 2.4rem)) scale(1.2);
     box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.542);
     cursor: zoom-in; }
     .photo-curent-large {
-      transform: rotate3d(0, 1, 0, 0) translate(-50%, 2.4rem) scale(2);
+      transform: rotate3d(0, 1, 0, 0) translate(-50%, calc(-50% + 2.4rem)) scale(2);
       cursor: zoom-out; }
   .photo-next {
     left: 65%;
     filter: brightness(0.5); }
     .photo-next-1 {
       z-index: 0;
-      transform: rotate3d(0, 1, 0, -45deg) translate(0, 2rem) scale(0.8, 1.1);
+      transform: rotate3d(0, 1, 0, -45deg) translate(0, calc(-50% + 2rem)) scale(0.8, 1.1);
       opacity: 0.9;
       cursor: pointer; }
     .photo-next-2 {
       z-index: -1;
-      transform: rotate3d(0, 1, 0, -45deg) translate(1rem, 1rem) scale(0.8, 1);
+      transform: rotate3d(0, 1, 0, -45deg) translate(1rem, calc(-50% + 1rem)) scale(0.8, 1);
       opacity: 0.65; }
     .photo-next-3 {
       z-index: -2;
-      transform: rotate3d(0, 1, 0, -45deg) translate(2rem, 0) scale(0.8, 0.95);
+      transform: rotate3d(0, 1, 0, -45deg) translate(2rem, calc(-50% + 0rem)) scale(0.8, 0.95);
       opacity: 0.4; }
     .photo-next-4 {
       z-index: -3;
-      transform: rotate3d(0, 1, 0, -45deg) translate(3rem, -1rem) scale(0.8, 0.9);
+      transform: rotate3d(0, 1, 0, -45deg) translate(3rem, calc(-50% - 1rem)) scale(0.8, 0.9);
       opacity: 0.3; }
     .photo-next-5 {
       z-index: -4;
-      transform: rotate3d(0, 1, 0, -45deg) translate(4rem, -2rem) scale(0.8, 0.85);
+      transform: rotate3d(0, 1, 0, -45deg) translate(4rem, calc(-50% - 2rem)) scale(0.8, 0.85);
       opacity: 0.2; }
     .photo-next-6 {
       z-index: -4;
-      transform: rotate3d(0, 1, 0, -45deg) translate(4rem, -2rem) scale(0.8, 0.85);
+      transform: rotate3d(0, 1, 0, -45deg) translate(4rem, calc(-50% - 2rem)) scale(0.8, 0.85);
       visibility: hidden;
       opacity: 0;
       transition: all 2s; }
