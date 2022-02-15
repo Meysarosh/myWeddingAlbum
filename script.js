@@ -143,8 +143,10 @@ let photos = photosLand;
 let btnRight;
 let btnLeft;
 let btnClose;
+let autoSlide;
 let backToStartBtn;
 let switchBtn;
+let interval;
 
 document
   .querySelector(".nav__btns--slide")
@@ -183,6 +185,14 @@ const generateSlider = function () {
         }
       })
       .join("")}
+      <div class="autoslide">
+          <span class="autoslide__name">Auto slide</span>
+          <div class="autoslide__btn">
+            <span class="autoslide__btn__name">on</span>
+            <span class="autoslide__btn__name">off</span>
+            <div class="autoslide__btn__move"></div>
+          </div>
+        </div>
       <svg class="slider__icon slider__icon--close">
     <use xlink:href="img/symbol.svg#icon-cross"></use>
   </svg>
@@ -207,6 +217,7 @@ const generateSlider = function () {
   btnClose = document.querySelector(".slider__icon--close");
   backToStartBtn = document.querySelector(".slider__btn--reload");
   switchBtn = document.querySelector(".slider__btn--switch");
+  autoSlide = document.querySelector(".autoslide__btn");
 };
 generateSlider();
 
@@ -296,6 +307,13 @@ const moveRight = function () {
       backToStartBtn.style.visibility = "visible";
       switchBtn.style.visibility = "visible";
       btnRight.classList.add("slider__icon-inactive");
+      if (interval) {
+        interval = clearInterval(interval);
+        interval = null;
+        document
+          .querySelector(".autoslide__btn__move")
+          .classList.toggle("autoslide__btn__move--left");
+      }
     }
     if (curIndex == 1) btnLeft.classList.remove("slider__icon-inactive");
   }
@@ -324,6 +342,20 @@ const hideSlider = function () {
   slider.style.visibility = "hidden";
   slider.style.transform = "scale(0.0)";
 };
+//AUTOSLIDE
+
+document.querySelector(".slider").addEventListener("click", function (e) {
+  if (!e.target.closest(".autoslide__btn")) return;
+  if (interval) {
+    interval = clearInterval(interval);
+    interval = null;
+  } else {
+    interval = setInterval(moveRight, 3000);
+  }
+  document
+    .querySelector(".autoslide__btn__move")
+    .classList.toggle("autoslide__btn__move--left");
+});
 //slider arrow icons click
 document.querySelector(".slider").addEventListener("click", function (e) {
   if (!e.target.closest(".slider__icon")) return;

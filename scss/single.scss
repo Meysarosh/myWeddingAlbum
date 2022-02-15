@@ -280,6 +280,54 @@ body {
 // ::-webkit-scrollbar-button {
 
 // }
+.autoslide {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: $brown;
+  position: absolute;
+  width: 6rem;
+  height: 3rem;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  &__name {
+    font-size: 1rem;
+  }
+  &__btn {
+    width: 100%;
+    height: 1.5rem;
+    background-color: $slider-background;
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+
+    &__name {
+      font-size: 1rem;
+    }
+    &__move {
+      top: 0;
+      right: 0;
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background-color: $brownl;
+      opacity: 0.2;
+      border-radius: 1rem;
+      transition: all 0.2s;
+
+      &--left {
+        left: 0 !important;
+      }
+    }
+  }
+}
 .slider__btn {
   position: absolute;
   left: 50%;

@@ -203,6 +203,47 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: #1e212d; }
 
+.autoslide {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: #b68973;
+  position: absolute;
+  width: 6rem;
+  height: 3rem;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem; }
+  .autoslide__name {
+    font-size: 1rem; }
+  .autoslide__btn {
+    width: 100%;
+    height: 1.5rem;
+    background-color: #1e212d;
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer; }
+    .autoslide__btn__name {
+      font-size: 1rem; }
+    .autoslide__btn__move {
+      top: 0;
+      right: 0;
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background-color: #eabf9f;
+      opacity: 0.2;
+      border-radius: 1rem;
+      transition: all 0.2s; }
+      .autoslide__btn__move--left {
+        left: 0 !important; }
+
 .slider__btn {
   position: absolute;
   left: 50%;
