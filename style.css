@@ -197,7 +197,7 @@ body {
 .photo {
   max-width: 30%;
   max-height: 50%;
-  top: 5rem;
+  top: 25%;
   position: absolute;
   transition: all 1s; }
   .photo-prev {
