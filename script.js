@@ -139,6 +139,8 @@ const photosPort = [
 let curIndex = 0;
 const qtySide = 5;
 const slider = document.querySelector(".slider");
+const info = document.querySelector(".info");
+const window = document.querySelector(".info__window");
 let photos = photosLand;
 let btnRight;
 let btnLeft;
@@ -147,13 +149,6 @@ let autoSlide;
 let backToStartBtn;
 let switchBtn;
 let interval;
-
-document
-  .querySelector(".nav__btns--slide")
-  .addEventListener("click", function () {
-    slider.style.visibility = "visible";
-    slider.style.transform = "scale(1)";
-  });
 
 const sliderBottomActive = function () {
   const slides = document.querySelectorAll(".slider__bottom__img");
@@ -356,8 +351,34 @@ const autoslideStop = function () {
     .querySelector(".autoslide__btn__move")
     .classList.toggle("autoslide__btn__move--left");
 };
+////////Slider / Info btns
+document
+  .querySelector(".nav__btns--slide")
+  .addEventListener("click", function () {
+    slider.style.visibility = "visible";
+    slider.style.transform = "scale(1)";
+  });
+document
+  .querySelector(".nav__btns--info")
+  .addEventListener("click", function () {
+    info.style.visibility = "visible";
+    window.style.transform = "scale(1)";
+  });
+//close info / enlarge info
+info.addEventListener("click", function (e) {
+  if (
+    e.target.classList.contains("info") ||
+    e.target.classList.contains("info__icon") ||
+    e.target.closest(".info__icon")
+  ) {
+    info.style.visibility = "hidden";
+    window.style.transform = "scale(0.5)";
+  }
+  if (e.target.classList.contains("info__img")) {
+    window.classList.toggle("info__window--large");
+  }
+});
 //AUTOSLIDE
-
 document.querySelector(".slider").addEventListener("click", function (e) {
   if (!e.target.closest(".autoslide__btn")) return;
   if (interval) {

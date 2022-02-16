@@ -184,6 +184,53 @@ body {
       cursor: pointer; }
       .slider__bottom__img:hover {
         opacity: 1 !important; }
+  .slider__btn {
+    position: absolute;
+    left: 50%;
+    z-index: 2;
+    visibility: hidden;
+    font-size: 3rem;
+    font-family: inherit;
+    color: #faf3e0;
+    background-color: #1e212d;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: inline-block;
+    transition: all 0.2s;
+    animation: moveInBottom 1s ease-out 0.75s;
+    animation-fill-mode: forwards; }
+    .slider__btn::after {
+      background-color: #1e212d;
+      content: "";
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      border-radius: 1rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: all 0.4s; }
+    .slider__btn--reload {
+      transform: translate(-50%, -50%) scaleX(1) scaleY(1);
+      top: 10rem; }
+      .slider__btn--reload:hover {
+        transform: translate(-50%, -50%) scaleX(0.9) scaleY(0.9);
+        box-shadow: 0 1rem 2rem rgba(30, 33, 45, 0.2);
+        color: #b68973; }
+        .slider__btn--reload:hover::after {
+          transform: translate(0, 0) scaleX(1.4) scaleY(1.8);
+          opacity: 0; }
+    .slider__btn--switch {
+      transform: translate(-50%, 50%) scaleX(1) scaleY(1);
+      top: 10rem; }
+      .slider__btn--switch:hover {
+        transform: translate(-50%, 50%) scaleX(0.9) scaleY(0.9);
+        box-shadow: 0 1rem 2rem rgba(30, 33, 45, 0.2);
+        color: #b68973; }
+        .slider__btn--switch:hover::after {
+          transform: translate(0, 0) scaleX(1.4) scaleY(1.8);
+          opacity: 0; }
 
 /* width */
 ::-webkit-scrollbar {
@@ -244,54 +291,6 @@ body {
       transition: all 0.2s; }
       .autoslide__btn__move--left {
         left: 0 !important; }
-
-.slider__btn {
-  position: absolute;
-  left: 50%;
-  z-index: 2;
-  visibility: hidden;
-  font-size: 3rem;
-  font-family: inherit;
-  color: #faf3e0;
-  background-color: #1e212d;
-  padding: 1rem;
-  border-radius: 1rem;
-  display: inline-block;
-  transition: all 0.2s;
-  animation: moveInBottom 1s ease-out 0.75s;
-  animation-fill-mode: forwards; }
-  .slider__btn::after {
-    background-color: #1e212d;
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all 0.4s; }
-  .slider__btn--reload {
-    transform: translate(-50%, -50%) scaleX(1) scaleY(1);
-    top: 10rem; }
-    .slider__btn--reload:hover {
-      transform: translate(-50%, -50%) scaleX(0.9) scaleY(0.9);
-      box-shadow: 0 1rem 2rem rgba(30, 33, 45, 0.2);
-      color: #b68973; }
-      .slider__btn--reload:hover::after {
-        transform: translate(0, 0) scaleX(1.4) scaleY(1.8);
-        opacity: 0; }
-  .slider__btn--switch {
-    transform: translate(-50%, 50%) scaleX(1) scaleY(1);
-    top: 10rem; }
-    .slider__btn--switch:hover {
-      transform: translate(-50%, 50%) scaleX(0.9) scaleY(0.9);
-      box-shadow: 0 1rem 2rem rgba(30, 33, 45, 0.2);
-      color: #b68973; }
-      .slider__btn--switch:hover::after {
-        transform: translate(0, 0) scaleX(1.4) scaleY(1.8);
-        opacity: 0; }
 
 .photo {
   max-width: 30%;
@@ -367,3 +366,42 @@ body {
       visibility: hidden;
       opacity: 0;
       transition: all 2s; }
+
+.info {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 33, 45, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .info__window {
+    transform: scale(0.5);
+    max-width: 90%;
+    max-height: 90%;
+    background-color: #faf3e0;
+    border-radius: 2rem;
+    padding: 1rem;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.4s; }
+    .info__window--large {
+      transform: scale(1.5) !important; }
+  .info__icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: #1e212d;
+    position: absolute;
+    top: 1rem;
+    right: 1rem; }
+    .info__icon:hover {
+      transform: scale(1.2);
+      fill: #b68973; }
+    .info__icon:active {
+      transform: scale(0.9); }
+  .info__img {
+    max-width: 80vw;
+    max-height: 80vh; }
