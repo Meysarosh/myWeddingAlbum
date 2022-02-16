@@ -312,13 +312,7 @@ const moveRight = function () {
       backToStartBtn.style.visibility = "visible";
       switchBtn.style.visibility = "visible";
       btnRight.classList.add("slider__icon-inactive");
-      if (interval) {
-        interval = clearInterval(interval);
-        interval = null;
-        document
-          .querySelector(".autoslide__btn__move")
-          .classList.toggle("autoslide__btn__move--left");
-      }
+      if (interval) autoslideStop();
     }
     if (curIndex == 1) btnLeft.classList.remove("slider__icon-inactive");
   }
@@ -347,21 +341,32 @@ const hideSlider = function () {
   slider.style.visibility = "hidden";
   slider.style.transform = "scale(0.0)";
 };
+
+const autoslideStart = function () {
+  interval = setInterval(moveRight, 3000);
+  document
+    .querySelector(".autoslide__btn__move")
+    .classList.toggle("autoslide__btn__move--left");
+};
+
+const autoslideStop = function () {
+  interval = clearInterval(interval);
+  interval = null;
+  document
+    .querySelector(".autoslide__btn__move")
+    .classList.toggle("autoslide__btn__move--left");
+};
 //AUTOSLIDE
 
 document.querySelector(".slider").addEventListener("click", function (e) {
   if (!e.target.closest(".autoslide__btn")) return;
   if (interval) {
-    interval = clearInterval(interval);
-    interval = null;
+    autoslideStop();
   } else {
-    interval = setInterval(moveRight, 3000);
+    autoslideStart();
   }
-  document
-    .querySelector(".autoslide__btn__move")
-    .classList.toggle("autoslide__btn__move--left");
 });
-//slider arrow icons click
+//slider icons click (left/right arrows and cross)
 document.querySelector(".slider").addEventListener("click", function (e) {
   if (!e.target.closest(".slider__icon")) return;
   if (
@@ -377,8 +382,10 @@ document.querySelector(".slider").addEventListener("click", function (e) {
   if (
     e.target.closest(".slider__icon--close") ||
     e.target.classList.contains("slider__icon--close")
-  )
+  ) {
     hideSlider();
+    if (interval) autoslideStop();
+  }
 });
 //keyboard arrows
 document.addEventListener("keydown", function (e) {

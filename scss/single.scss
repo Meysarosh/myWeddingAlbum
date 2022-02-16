@@ -64,6 +64,7 @@ body {
     &:hover {
       transform: translateY(-0.3rem);
       box-shadow: 0 1rem 2rem rgba($slider-background, 0.2);
+      color: $brown;
 
       &::after {
         transform: scaleX(1.4) scaleY(1.8);
@@ -363,6 +364,7 @@ body {
     &:hover {
       transform: translate(-50%, -50%) scaleX(0.9) scaleY(0.9);
       box-shadow: 0 1rem 2rem rgba($slider-background, 0.2);
+      color: $brown;
 
       &::after {
         transform: translate(0, 0) scaleX(1.4) scaleY(1.8);
@@ -377,6 +379,7 @@ body {
     &:hover {
       transform: translate(-50%, 50%) scaleX(0.9) scaleY(0.9);
       box-shadow: 0 1rem 2rem rgba($slider-background, 0.2);
+      color: $brown;
 
       &::after {
         transform: translate(0, 0) scaleX(1.4) scaleY(1.8);
