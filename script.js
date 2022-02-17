@@ -204,7 +204,13 @@ const generateSlider = function () {
     .map((el, i) => {
       return `<img src="${el}" alt="photo" data-id="${i}" class="slider__bottom__img" />`;
     })
-    .join("")}</div>`
+    .join("")}</div>
+    <div class="rotate">
+      <svg class="rotate__icon">
+      <use xlink:href="img/symbol.svg#icon-spinner11"></use>
+      </svg>
+      <p class="rotate__text">Please, rotate your device to landscape<p>
+    </div>`
   );
   sliderBottomActive();
 
@@ -351,12 +357,21 @@ const autoslideStop = function () {
     .querySelector(".autoslide__btn__move")
     .classList.toggle("autoslide__btn__move--left");
 };
+const screenOrientation = function () {
+  if (screen.orientation.type == "portrait-primary") {
+    document.querySelector(".rotate").style.visibility = "visible";
+    screen.orientation.onchange = function () {
+      document.querySelector(".rotate").style.visibility = "hidden";
+    };
+  }
+};
 ////////Slider / Info btns
 document
   .querySelector(".nav__btns--slide")
   .addEventListener("click", function () {
     slider.style.visibility = "visible";
     slider.style.transform = "scale(1)";
+    screenOrientation();
   });
 document
   .querySelector(".nav__btns--info")
